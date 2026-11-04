@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>9주차 실습 — CSS3 고급 활용</title>
+  <style>
+    /* ⑦ CSS 변수 */
+    :root {
+      --main: #5145cd;
+      --text: #22223b;
+      --bg: #f7f7fc;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, "Malgun Gothic", sans-serif;
+      line-height: 1.6;
+    }
+
+    main {
+      width: min(100%, 1100px);
+      margin: 0 auto;
+    }
+
+    h1 { color: var(--main); }
+
+    h2 {
+      margin-top: 36px;
+      border-bottom: 2px solid #dedcf5;
+      padding-bottom: 8px;
+    }
+
+    /* ① .box 가운데 정렬 */
+    .box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 240px;
+      background: #eeeaff;
+      border-radius: var(--radius);
+      margin: 16px 0;
+    }
+
+    /* ② 가로 내비게이션 */
+    .nav-list {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+    }
+
+    .nav-list a {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-list a:hover { color: var(--main); }
+
+    /* ③ Flexbox 반응형 카드 */
+    .flex-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .card {
+      flex: 1 1 240px;
+      padding: 20px;
+      border: 1px solid #dedcf5;
+      border-radius: var(--radius);
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* ④ 미디어쿼리 없는 Grid 갤러리 */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .gallery-item {
+      min-height: 130px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: var(--radius);
+      background: #e8e5ff;
+      color: var(--main);
+      font-weight: bold;
+    }
+
+    /* ⑤ 모바일 우선 카드 격자 */
+    .responsive-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 640px) {
+      .responsive-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .responsive-cards {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    /* ⑥ 기본 규칙을 먼저, 모바일 규칙을 나중에 작성 */
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .demo-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ⑦ 버튼도 변수 사용 */
+    button {
+      background: var(--main);
+      color: white;
+      border: 0;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      cursor: pointer;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 16px; }
+      .nav-list { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>9주차 실습 — CSS3 고급 활용</h1>
+    <p>Flexbox, Grid, 반응형 웹 디자인 실습 결과입니다.</p>
+
+    <section>
+      <h2>① Flexbox 가운데 정렬</h2>
+      <div class="box">가로·세로 가운데 정렬</div>
+    </section>
+
+    <section>
+      <h2>② 가로 내비게이션 메뉴</h2>
+      <ul class="nav-list">
+        <li><a href="#flex">메뉴 1</a></li>
+        <li><a href="#gallery">메뉴 2</a></li>
+        <li><a href="#responsive">메뉴 3</a></li>
+      </ul>
+    </section>
+
+    <section id="flex">
+      <h2>③ Flexbox 반응형 카드</h2>
+      <div class="flex-cards">
+        <article class="card"><h3>카드 1</h3><p>화면 크기에 따라 카드가 자동으로 줄바꿈됩니다.</p></article>
+        <article class="card"><h3>카드 2</h3><p>카드의 기본 너비는 240px입니다.</p></article>
+        <article class="card"><h3>카드 3</h3><p>카드 사이 간격은 16px입니다.</p></article>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <h2>④ 미디어쿼리 없는 반응형 갤러리</h2>
+      <div class="gallery">
+        <div class="gallery-item">갤러리 1</div>
+        <div class="gallery-item">갤러리 2</div>
+        <div class="gallery-item">갤러리 3</div>
+        <div class="gallery-item">갤러리 4</div>
+      </div>
+    </section>
+
+    <section id="responsive">
+      <h2>⑤ 모바일 우선 카드 격자</h2>
+      <div class="responsive-cards">
+        <article class="card"><h3>반응형 카드 1</h3><p>기본 화면에서는 1열입니다.</p></article>
+        <article class="card"><h3>반응형 카드 2</h3><p>640px 이상에서는 2열입니다.</p></article>
+        <article class="card"><h3>반응형 카드 3</h3><p>1024px 이상에서는 3열입니다.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <h2>⑥ 미디어쿼리 순서 수정</h2>
+      <div class="demo-grid">
+        <div class="card">격자 1</div>
+        <div class="card">격자 2</div>
+        <div class="card">격자 3</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>⑦ CSS 변수 적용</h2>
+      <article class="card">
+        <h3>CSS 변수 카드</h3>
+        <p>배경색, 글자색, 모서리 반경을 변수로 적용했습니다.</p>
+        <button type="button">버튼</button>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
